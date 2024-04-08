@@ -21,9 +21,9 @@ export default function StandardFooter({isClicked, handleClick, isMobileWidth}) 
       </div>
       <div className={styles.buttonContainer}>
         {/* TODO: Add changing colour styling for this button component */}
-        <button onClick={handleClick} className={styles.shareButton}>
+        <button onClick={handleClick} className={`${styles.shareButton} ${isClicked ? styles.grayBackground : ""}`}>
           <ShareIcon
-            fill="#6E8098"
+            fill={isClicked ? "white" : "#6E8098"}
             alt="image of a curved arrow that is meant to represent sharing"
           />
         </button>
