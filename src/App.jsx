@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 
 import ActiveFooter from "./components/ActiveFooter.jsx";
 import StandardFooter from "./components/StandardFooter.jsx";
-import ActivePopup from "./components/ActivePopup.jsx";
 
 import drawersImage from "./assets/images/drawers.jpg";
 
 import styles from "./App.module.css";
 
-const MOBILE_WIDTH_THRESHOLD = 500
+const MOBILE_WIDTH_THRESHOLD = 800;
 
 function App() {
   const [isClicked, setIsClicked] = useState(false);
@@ -44,23 +43,29 @@ function App() {
         alt="Drawers with carefully curated decorations"
         className={styles.headerImage}
       ></img>
-      <section className={styles.articleInfoContainer}>
-        <h1 className={styles.h1}>
-          Shift the overall look and feel by adding these wonderful touches to
-          furniture in your home
-        </h1>
-        <p className={styles.paragraph}>
-          Ever been in a room and felt like something was missing? Perhaps it
-          felt slightly bare and uninviting. I’ve got some simple tips to help
-          you make any room feel complete.
-        </p>
-      </section>
-      {!isClicked && <StandardFooter handleClick={handleClick} />}
+      <div className={styles.contentContainer}>
+        <section className={styles.articleInfoContainer}>
+          <h1 className={styles.h1}>
+            Shift the overall look and feel by adding these wonderful touches to
+            furniture in your home
+          </h1>
+          <p className={styles.paragraph}>
+            Ever been in a room and felt like something was missing? Perhaps it
+            felt slightly bare and uninviting. I’ve got some simple tips to help
+            you make any room feel complete.
+          </p>
+        </section>
+        {(!isClicked || !isMobileWidth()) && (
+          <StandardFooter
+            isClicked={isClicked}
+            handleClick={handleClick}
+            isMobileWidth={isMobileWidth}
+          />
+        )}
+      </div>
+
       {isClicked && isMobileWidth() && (
         <ActiveFooter handleClick={handleClick} />
-      )}
-      {isClicked && !isMobileWidth() && (
-        <ActivePopup />
       )}
     </main>
   );
